@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-<title></title>
+<title>Injury On Duty</title>
 
 <meta content="" name="descriptison">
     <meta content="" name="keywords">
@@ -44,6 +44,5 @@
     <script src="../../assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript" src="../../assets/font-awesome/js/all.min.js"></script>
     <script type="text/javascript" src="../../assets/js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
-
-
+</head>
 
