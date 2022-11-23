@@ -1,83 +1,79 @@
 <?php 
+	session_start();
 	include('../includes/header.inc.php');
 ?>
-
-</head>
 <style>
-	body{
-		width: 100%;
-	    height: calc(100%);
-	    /*background: #007bff;*/
+	#alert-div{
+		transition: opacity 1s;
 	}
-	main#main{
-		width:100%;
-		height: calc(100%);
-		background:white;
-	}
-	#login-right{
-		position: absolute;
-		right:0;
-		width:40%;
-		height: calc(100%);
-		background:white;
-		display: flex;
-		align-items: center;
-	}
-	#login-left{
-		position: absolute;
-		left:0;
-		width:60%;
-		height: calc(100%);
-		background:#00000061;
-		display: flex;
-		align-items: center;
-	}
-	#login-right .card{
-		margin: auto
-	}
-	.logo {
-    margin: auto;
-    font-size: 8rem;
-    background: white;
-    padding: .5em 0.8em;
-    border-radius: 50% 50%;
-    color: #000000b3;
-}
 </style>
 
+</head>
 <body>
-
-
-<main id="main" class=" alert-info">
-	<div id="login-left">
-		<div class="logo">
-			<i class="fa fa-share-alt"></i>
-		</div>
-	</div>
-	<div id="login-right">
-		<div class="card col-md-8">
-			<div class="card-body">
-				<form id="login-form" action="log-user.php">
-					<div class="form-group">
-						<label for="username" class="control-label">Email Address</label>
-						<input type="text" id="username" name="email" class="form-control">
+	<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+		<div class="container">
+		<div class="row justify-content-center">
+			<?php
+				if(isset($_SESSION["msg"])){
+					echo '
+					<div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert-div">
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						<strong>'.$_SESSION["msg"].'</strong> 
 					</div>
-					<div class="form-group">
-						<label for="password" class="control-label">Password</label>
-						<input type="password" id="password" name="password" class="form-control">
+					';
+				}
+			?>
+
+			<script>
+				var alertList = document.querySelectorAll('.alert');
+				alertList.forEach(function (alert) {
+				new bootstrap.Alert(alert)
+				});
+
+				const target = document.getElementById('alert-div');
+				window.onload = setInterval(()=>target.style.opacity = '0', 5000);
+			</script>
+
+			<div class="col-lg-8">
+				<form action="log-user.php">
+					<div class="card-group d-block d-md-flex row">
+						<div class="card col-md-7 p-4 mb-0">
+							<div class="card-body">
+								<h1>Login</h1>
+								<p class="text-medium-emphasis">Sign In to your account</p>
+								<div class="input-group mb-3"><span class="input-group-text">
+									<svg class="icon">
+									<use xlink:href="../../vendors/@coreui/icons/svg/free.svg#cil-user"></use>
+									</svg></span>
+								<input class="form-control" type="email" id="email" name="email" placeholder="Email Address">
+								</div>
+								<div class="input-group mb-4"><span class="input-group-text">
+									<svg class="icon">
+									<use xlink:href="../../vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
+									</svg></span>
+								<input class="form-control" type="password" id="password" name="password" placeholder="Password">
+								</div>
+								<div class="row">
+									<div class="col-6">
+										<button  type="submit"  class="btn btn-primary px-4" type="button">Login</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card col-md-5 text-white bg-primary py-5">
+							<div class="card-body text-center">
+								<div>
+									<h2>Sign up</h2>
+									<p>Put logo and description of the system or some motivation qoute etc</p>
+									<a class="btn btn-lg btn-outline-light mt-3" type="button" href="register.php">Register</a>
+								</div>
+							</div>
+						</div>
 					</div>
-					<center><button type="submit" class="btn-sm btn-block btn-wave col-md-4 btn-primary">Login</button></center>
 				</form>
 			</div>
 		</div>
+		</div>
 	</div>
-
-
-</main>
-
-<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-
-
 </body>
-
 </html>

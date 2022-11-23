@@ -1,4 +1,5 @@
 <?php
+session_start();
     define('CONTROLLERS',$_SERVER['DOCUMENT_ROOT']."/fms/controllers/");
 	require_once(CONTROLLERS.'userController.php');
     require_once(CONTROLLERS.'connection.php');
@@ -15,13 +16,14 @@
         $password = mysqli_real_escape_string($con, $password);
 
         if($userController->login($email, $password)){
-            $msg = "User successfully logged in";
-            $_SESSION["page"] = "claim/claim";
-            header("Location: ../temp.php?$msg");
+            $_SESSION["page"] = "admin/profile";
+            $_SESSION["msg"] = "User successfully logged in";
+            $_SESSION['email'] = $email;
+            header("Location: ../temp.php");
             die();
         }else{
-            $msg = "Email address or password incorrect";
-            header("Location: login.php?$msg");
+            $_SESSION["msg"] = "Email address or password incorrect";
+            header("Location: login.php");
             die();
         }
     }
