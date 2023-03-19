@@ -4,7 +4,7 @@ require_once(CONTROLLERS1.'userController.php');
 $userController = new UserController();
 
 $users = $userController->fetchAllUsers();
-
+$user_admin = $userController->getLoggedInUser($_SESSION["email"]);
 ?>
 
 <div class="container">
@@ -12,7 +12,8 @@ $users = $userController->fetchAllUsers();
         <div class="col p-4 card ">
             <div>
                 <span><big><b>List of users</b></big></span>
-                <a class="btn btn-primary float-end" href="#" role="button" data-bs-toggle="modal" data-bs-target="#modalId">ADD USER</a>
+                <a class="btn btn-secondary float-end" href="temp.php?page=admin/print-user">Print Users</a>
+                <a class="btn btn-success float-end" href="#" role="button" data-toggle="modal" data-target="#modelId">ADD USER</a>
             </div>
             <hr><br>
             <table class="table table-striped table-bordered" style="width:100%"  id="datatable">
@@ -33,37 +34,44 @@ $users = $userController->fetchAllUsers();
                     $count = 1;
                     foreach ($users as $user){
                         if($user->getEmail() != "admin@gmail.com"){
-                            echo '
-                                <tr>
-                                    <td>'.$count++.'</td>
-                                    <td scope="row">'.$user->getFirstName().'</td>
-                                    <td>'.$user->getLastName().'</td>
-                                    <td>'.$user->getEcNumber().'</td>
-                                    <td>'.$user->getDesignation().'</td>
-                                    <td>'.$user->getEmail().'</td>
-                                    ';
-                                    if($user->getPassword() == null || $user->getPassword() == ' '){
-                                        echo'<td><span class="badge bg-warning p-2">incomplete</span></td>';
-                                    }else{echo'<td><span class="badge bg-primary p-2">completed</span></td>';}
+                        echo '
+                            <tr>
+                                <td>'.$count++.'</td>
+                                <td scope="row">'.$user->getFirstName().'</td>
+                                <td>'.$user->getLastName().'</td>
+                                <td>'.$user->getEcNumber().'</td>
+                                <td>'.$user->getDesignation().'</td>
+                                <td>'.$user->getEmail().'</td>
+                                ';
+                                if($user->getPassword() == null || $user->getPassword() == ' '){
+                                    echo'<td><span class="badge bg-warning p-2">incomplete</span></td>';
+                                }else{echo'<td><span class="badge bg-success p-2">completed</span></td>';}
+                                
+                                if($user->getPassword() == null || $user->getPassword() == ' ' || $user_admin->getEmail() == "admin@gmail.com"){
                                     echo'
-                                    <td>
-                                        <div class="dropdown open">
-                                            <a type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"aria-expanded="false">
-                                            <span>
-                                                <svg class="icon  text-muted">
-                                                    <use xlink:href="../vendors/@coreui/icons/svg/free.svg#cil-options"></use>
-                                                </svg>
-                                            </span>
-                                            </a>
-                                            <div class="dropdown-menu" aria-labelledby="triggerId">
-                                                <a class="dropdown-item" href="#">Edit</a>
-                                                <a class="dropdown-item" href="#">Delete</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ';
-                        }
+                                            <td>
+                                                <form action="admin/route.php">
+                                                <input class="visually-hidden" type="number" name="id" value="'.$user->getId().'"/>
+                                                    <div class="dropdown open">
+                                                        <a type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <span>
+                                                            <svg class="icon  text-muted">
+                                                                <use xlink:href="../assets/vendors/@coreui/icons/svg/free.svg#cil-options"></use>
+                                                            </svg>
+                                                        </span>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
+                                                            <button class="dropdown-item" name="edit" type="submit">Edit</button>
+                                                            <button class="dropdown-item" name="delete" type="submit">Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    ';
+                                }
+                                
+                            }
                     }
                 ?>
                 </tbody>
@@ -75,12 +83,12 @@ $users = $userController->fetchAllUsers();
 
 <!-- Modal Body -->
 <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-<div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog modal-dialog modal-dialog-centered modal-md " role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTitleId">Create a new user</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="admin/add-user.php">
                 <div class="modal-body">
@@ -109,8 +117,8 @@ $users = $userController->fetchAllUsers();
                 </div>
                 
                 <div class="modal-footer">
-                    <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" value="submit" class="btn btn-primary">Add</button>
+                    <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" value="submit" name="create" class="btn btn-success">Add</button>
                 </div>
             </form>
         </div>

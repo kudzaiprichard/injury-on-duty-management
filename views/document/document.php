@@ -1,4 +1,5 @@
 <?php 
+if(!isset($_SESSION['email'])){header('location: ../auth/login.php');}
 define('CONTROLLERS1',$_SERVER['DOCUMENT_ROOT']."/fms/controllers/");
 require_once(CONTROLLERS1.'userController.php');
 $userController = new UserController();
@@ -19,7 +20,7 @@ $folders = $userController->fetchAllFolders();
                             <input type="number" value="'.$folder->getClaimant()->getId().'" name="claimant_id" class="visually-hidden">
                                 <div class="card" >
                                     <svg class="nav-icon shadow rounded-bottom" >
-                                        <use xlink:href="../vendors/@coreui/icons/svg/free.svg#cil-folder"></use>
+                                        <use xlink:href="../assets/vendors/@coreui/icons/svg/free.svg#cil-folder"></use>
                                     </svg> 
                                     <div class="card-body">
                                     <h6 class="card-title"><small>#'.$count++.'</small></h6>

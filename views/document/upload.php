@@ -1,4 +1,5 @@
 <?php
+if(!isset($_SESSION['email'])){header('location: ../auth/login.php');}
 session_start();
     define('PATH',$_SERVER['DOCUMENT_ROOT']."/fms/");
     define('CONTROLLERS',$_SERVER['DOCUMENT_ROOT']."/fms/controllers/");

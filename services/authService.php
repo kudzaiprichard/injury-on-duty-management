@@ -54,6 +54,20 @@ class AuthService{
         return $isUpdated;
     }
 
+    function editUser($id,$firstName,$lastName,$ecNumber,$designation,$emailAddress){
+        $con = $this->db->openConnection();
+        $isUpdated = false;
+
+        $query = "UPDATE `users` SET `first_name`= '$firstName', `last_name`='$lastName', `email`='$emailAddress',
+                                    `ec_number`='$ecNumber', `designation`='$designation' WHERE  `id` = '$id'"; 
+
+        if($result = mysqli_query($con, $query)){
+            $isUpdated = true;
+        }
+
+        return $isUpdated;
+    }
+
     function login($email, $password){
         $con = $this->db->openConnection();
         $query  = "SELECT * FROM `users` WHERE `email` = '$email' AND `password` = '" . md5($password) . "' ";
@@ -108,6 +122,28 @@ class AuthService{
         $row = $result->fetch_assoc();
         $user = new User($row['id'],$row['first_name'],$row['last_name'],$row['ec_number'],$row['designation'],$row['email'],$row['password']);
         return $user;
+    }
+
+    function getUserById($id){
+        $con = $this->db->openConnection();
+        $query = "SELECT * FROM `users` WHERE `id` = '$id'";
+        $result = mysqli_query($con, $query);
+
+        $row = $result->fetch_assoc();
+        $user = new User($row['id'],$row['first_name'],$row['last_name'],$row['ec_number'],$row['designation'],$row['email'],$row['password']);
+        return $user;
+    }
+
+    function deleteUserById($userId){
+        $isDeleted = false;
+        $con = $this->db->openConnection();
+        $query = "DELETE FROM `users` WHERE `id` = '$userId'";
+
+        if($result = mysqli_query($con, $query)){
+            $isDeleted = true;
+        }
+
+        return $isDeleted;
     }
 
     function logout(){

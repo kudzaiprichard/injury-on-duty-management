@@ -40,7 +40,7 @@ $user = $userController->getLoggedInUser($_SESSION["email"]);
                         <h6>
                             <span>
                                 <svg class="icon">
-                                    <use xlink:href="../vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
+                                    <use xlink:href="../assets/vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
                                 </svg>
                             </span>
                             Edit Profile
@@ -77,7 +77,7 @@ $user = $userController->getLoggedInUser($_SESSION["email"]);
                             <input type="text" class="form-control" id="validationCustom03" name="confirm_password"  placeholder="Enter confirm password">
                         </div>
                         <div class="col-12 my-2 mt-2">
-                            <button type="submit" name="update-profile" value="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" name="update-profile" value="submit" class="btn btn-success">Update</button>
                         </div>
                     </section>
                 </form>

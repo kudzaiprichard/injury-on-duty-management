@@ -8,7 +8,7 @@ $user = $userController->getLoggedInUser($_SESSION['email']);
 	<div class="container-fluid">
 		<button class="header-toggler px-md-0 me-md-3" type="button" onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()">
 	<svg class="icon icon-lg">
-		<use xlink:href="../vendors/@coreui/icons/svg/free.svg#cil-menu"></use>
+		<use xlink:href="../assets/vendors/@coreui/icons/svg/free.svg#cil-menu"></use>
 	</svg>
 	</button>
 		<a class="header-brand d-md-none" href="#">
@@ -20,10 +20,12 @@ $user = $userController->getLoggedInUser($_SESSION['email']);
 
 		<ul class="header-nav ms-3">
 			<li class="nav-item dropdown">
-
+				<!-- place placeholder image -->
 				<a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
 					<span class="m-3"><?php echo $user->getEmail(); ?></span>
-					<div class="avatar avatar-md"><img class="avatar-img" src="../assets/img/avatars/8.jpg"></div>
+					<svg class="icon me-2">
+							<use xlink:href="../assets/vendors/@coreui/icons/svg/free.svg#cil-user"></use>
+						</svg> 
 				</a>
 
 				<div class="dropdown-menu dropdown-menu-end pt-0">
@@ -34,13 +36,13 @@ $user = $userController->getLoggedInUser($_SESSION['email']);
 
 					<a class="dropdown-item" href="temp.php?page=admin/profile">
 						<svg class="icon me-2">
-							<use xlink:href="../vendors/@coreui/icons/svg/free.svg#cil-contact"></use>
+							<use xlink:href="../assets/vendors/@coreui/icons/svg/free.svg#cil-contact"></use>
 						</svg> Profile
 					</a>
 
 					<a class="dropdown-item" href="temp.php?page=admin/users">
 						<svg class="icon me-2">
-							<use xlink:href="../vendors/@coreui/icons/svg/free.svg#cil-people"></use>
+							<use xlink:href="../assets/vendors/@coreui/icons/svg/free.svg#cil-people"></use>
 						</svg> Users
 					</a>
 
@@ -48,7 +50,7 @@ $user = $userController->getLoggedInUser($_SESSION['email']);
 
 					<a class="dropdown-item" href="../views/auth/logout.php">
 						<svg class="icon me-2">
-							<use xlink:href="../vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
+							<use xlink:href="../assets/vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
 						</svg> Logout
 					</a>
 				</div>
@@ -75,7 +77,7 @@ $user = $userController->getLoggedInUser($_SESSION['email']);
 			</div>
 			';
 		}
-
+		
 		if($page == "admin/users"){
 			echo '
 			<div class="container-fluid">
@@ -85,6 +87,21 @@ $user = $userController->getLoggedInUser($_SESSION['email']);
 							<span>Dashboard</span>
 						</li>
 						<li class="breadcrumb-item active"><span>Users</span></li>
+					</ol>
+				</nav>
+			</div>
+			';
+		}
+
+		if($page == "admin/edit-user"){
+			echo '
+			<div class="container-fluid">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb my-0 ms-2">
+						<li class="breadcrumb-item">
+							<span>Dashboard</span>
+						</li>
+						<li class="breadcrumb-item active"><span>Edit User</span></li>
 					</ol>
 				</nav>
 			</div>
@@ -175,6 +192,66 @@ $user = $userController->getLoggedInUser($_SESSION['email']);
 							<span>Claim</span>
 						</li>
 						<li class="breadcrumb-item active"><span>Details</span></li>
+					</ol>
+				</nav>
+			</div>
+			';
+		}
+
+		if($page == "document/update-file"){
+			echo '
+			<div class="container-fluid">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb my-0 ms-2">
+						<li class="breadcrumb-item">
+							<span>Files</span>
+						</li>
+						<li class="breadcrumb-item active"><span>Edit</span></li>
+					</ol>
+				</nav>
+			</div>
+			';
+		}
+
+		if($page == "claimant/print-claimant"){
+			echo '
+			<div class="container-fluid">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb my-0 ms-2">
+						<li class="breadcrumb-item">
+							<span>Claimants</span>
+						</li>
+						<li class="breadcrumb-item active"><span>Print</span></li>
+					</ol>
+				</nav>
+			</div>
+			';
+		}
+
+		if($page == "claim/claim-print"){
+			echo '
+			<div class="container-fluid">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb my-0 ms-2">
+						<li class="breadcrumb-item">
+							<span>Claims</span>
+						</li>
+						<li class="breadcrumb-item active"><span>Print</span></li>
+					</ol>
+				</nav>
+			</div>
+			';
+		}
+
+		if($page == "admin/print-user"){
+			echo '
+			<div class="container-fluid">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb my-0 ms-2">
+						<li class="breadcrumb-item">
+							<span>Users</span>
+						</li>
+						<li class="breadcrumb-item active"><span>Print</span></li>
 					</ol>
 				</nav>
 			</div>

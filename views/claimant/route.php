@@ -1,4 +1,5 @@
 <?php 
+if(!isset($_SESSION['email'])){header('location: ../auth/login.php');}
 define('CONTROLLERS',$_SERVER['DOCUMENT_ROOT']."/fms/controllers/");
 require_once(CONTROLLERS.'connection.php');
 $db = new Connection("localhost", "root", "", "fms_db");

@@ -37,9 +37,10 @@ session_start();
         </script>
         
         <form action="register-user.php">
-            <div class="card mb-4 mx-4">
+        
+            <div class=" shadow-lg mb-4 mx-4">
                 <div class="card-body p-4">
-                <h1>Register</h1>
+                <h1 class="text-success mb-3" align="center">Register</h1>
                 <p class="text-medium-emphasis">Register your account</p>
 
                 <div class="input-group mb-3"><span class="input-group-text">
@@ -63,8 +64,8 @@ session_start();
                     <input class="form-control" type="password" placeholder="Repeat password" name="repeat_password">
                 </div>
 
-                <p>Already have an account  <a href="login.php">login</a></p>
-                <button class="btn btn-block btn-success" type="submit">Create Account</button>
+                <p>Already have an account  <a href="login.php" class="text-success">login</a></p>
+                <button class="btn btn-block  btn-success shadow-sm" type="submit">Create Account</button>
                 </div>
             </div>
         </form>

@@ -27,6 +27,14 @@ class UserController{
         return $this->authService->createUser($firstName,$lastName,$ecNumber,$designation,$emailAddress,$password,$registering);
     }
 
+    function editUser($id,$firstName,$lastName,$ecNumber,$designation,$emailAddress){
+        return $this->authService->editUser($id,$firstName,$lastName,$ecNumber,$designation,$emailAddress);
+    }
+
+    function deleteUserById($userId){
+        return $this->authService->deleteUserById($userId);
+    }
+
     function updateProfile($id, $firstName,$lastName,$email,$ecNumber,$designation,$password){
         return $this->authService->updateProfile($id,$firstName,$lastName,$email,$ecNumber,$designation,$password);
     }
@@ -41,6 +49,10 @@ class UserController{
 
     function getLoggedInUser($email){
         return $this->authService->getLoggedInUser($email);
+    }
+
+    function getUserById($id){
+        return $this->authService->getUserById($id);
     }
 
     function createClaim($firstName,$lastName,$nationalId,$ecNumber,$department,$type,$place,$date,$stage,$status,$reference){

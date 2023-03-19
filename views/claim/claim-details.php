@@ -1,4 +1,5 @@
 <?php
+if(!isset($_SESSION['email'])){header('location: ../auth/login.php');}
 define('CONTROLLERS1',$_SERVER['DOCUMENT_ROOT']."/fms/controllers/");
 require_once(CONTROLLERS1.'userController.php');
 $userController = new UserController();
@@ -51,7 +52,7 @@ $claim = $userController->fetchClaimById($_SESSION["v_claim_id"]);
                         <h6>
                             <span>
                                 <svg class="icon">
-                                    <use xlink:href="../vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
+                                    <use xlink:href="../assets/vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
                                 </svg>
                             </span>
                             Edit Claim Details

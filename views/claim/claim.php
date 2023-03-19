@@ -1,4 +1,6 @@
 <?php 
+if(!isset($_SESSION['email'])){header('location: ../auth/login.php');}
+
 define('CONTROLLERS1',$_SERVER['DOCUMENT_ROOT']."/fms/controllers/");
 require_once(CONTROLLERS1.'userController.php');
 $userController = new UserController();
@@ -11,7 +13,8 @@ $claims = $userController->fetchAllClaims();
     <div class="p-3 m-3">
         <div>
             <span><big><b>List of claims</b></big></span>
-            <a class="btn btn-primary float-end" href="#" role="button" data-bs-toggle="modal" data-bs-target="#modalId">ADD CLAIM</a>
+            <a class="btn btn-dark float-end text-white" href="temp.php?page=claim/claim-print">Print Claims</a>
+            <a class="btn btn-success float-end" href="#" role="button" data-toggle="modal" data-target="#modelId">ADD CLAIM</a>
         </div>
         <hr>
         <br>
@@ -50,14 +53,14 @@ $claims = $userController->fetchAllClaims();
                             <input type="number" name="claim_id" class="visually-hidden" value="'.$claim->getId().'"/>
                             <input type="number" name="claimant_id" class="visually-hidden" value="'.$claim->getClaimant()->getId().'"/>
                                 <div class="dropdown open">
-                                    <a type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"aria-expanded="false">
+                                    <a type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <span>
                                             <svg class="icon  text-muted">
-                                                <use xlink:href="../vendors/@coreui/icons/svg/free.svg#cil-options"></use>
+                                                <use xlink:href="../assets/vendors/@coreui/icons/svg/free.svg#cil-options"></use>
                                             </svg>
                                         </span>
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
                                         <button class="dropdown-item" type="submit" name="view-documents">View Documents</button>
                                         <button class="dropdown-item" type="submit" name="view-claimant">View Claimant</button>
                                         <button class="dropdown-item" type="submit" name="delete">Delete</button>
@@ -77,12 +80,12 @@ $claims = $userController->fetchAllClaims();
 
 <!-- Modal Body -->
 <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-<div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog modal-dialog modal-dialog-centered modal-md " role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTitleId">Create a new claim</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="claim/create-claim.php">
                 <div class="modal-body">
@@ -145,17 +148,11 @@ $claims = $userController->fetchAllClaims();
                 </div>
                 
                 <div class="modal-footer">
-                    <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" value="submit" class="btn btn-primary">Create</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
-
-<!-- Optional: Place to the bottom of scripts -->
-<script>
-    const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
-</script>
 

@@ -1,4 +1,5 @@
 <?php
+if(!isset($_SESSION['email'])){header('location: ../auth/login.php');}
 define('CONTROLLERS1',$_SERVER['DOCUMENT_ROOT']."/fms/controllers/");
 require_once(CONTROLLERS1.'userController.php');
 $userController = new UserController();
@@ -8,7 +9,7 @@ $claimant = $userController->fetchClaimantById($_SESSION["v_claimant_id"]);
 <section>
     <div class="container">
         <div class="row">
-            <div class="col ">
+            <div class="col">
                 <section class="row card p-3 m-3">
                     <div class="col-12 my-2">
                         <label for="validationCustom03" class="form-label">First Name</label>
@@ -39,7 +40,7 @@ $claimant = $userController->fetchClaimantById($_SESSION["v_claimant_id"]);
                         <h6>
                             <span>
                                 <svg class="icon">
-                                    <use xlink:href="../vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
+                                    <use xlink:href="../assets/vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
                                 </svg>
                             </span>
                             Edit Claimant Details
